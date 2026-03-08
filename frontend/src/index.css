@@ -1,0 +1,167 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700;800&family=JetBrains+Mono:wght@500;600&display=swap');
+
+@layer base {
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: #080D1A;
+    color: #F8FAFC;
+    font-family: 'Inter', system-ui, sans-serif;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: 'Outfit', sans-serif;
+    letter-spacing: -0.02em;
+  }
+
+  /* Noise texture overlay on body */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.4;
+  }
+
+  ::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #0D1120;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #1E2D45;
+    border-radius: 3px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #2563EB;
+  }
+}
+
+@layer components {
+  .glass-card {
+    background: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  }
+
+  .glass-card-hover {
+    @apply glass-card transition-all duration-300 cursor-pointer;
+  }
+
+  .glass-card-hover:hover {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(37, 99, 235, 0.35);
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.5), 0 0 30px rgba(37, 99, 235, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    transform: translateY(-2px);
+  }
+
+  .btn-primary {
+    @apply bg-primary text-white px-6 py-2.5 rounded-xl font-semibold text-sm hover:bg-primary-light transition-all duration-200 shadow-glow-blue hover:shadow-none active:scale-95;
+  }
+
+  .btn-ghost {
+    @apply text-slate-400 px-4 py-2 rounded-lg font-medium text-sm hover:text-white hover:bg-white/5 transition-all duration-200;
+  }
+
+  .input-field {
+    @apply w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:border-primary/50 focus:ring-2 focus:ring-primary/20 transition-all duration-200 text-sm;
+  }
+
+  .sidebar-link {
+    @apply flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-400 font-medium text-sm hover:text-white hover:bg-white/5 transition-all duration-200 cursor-pointer;
+  }
+
+  .sidebar-link.active {
+    @apply text-white;
+    background: linear-gradient(135deg, rgba(37, 99, 235, 0.25), rgba(124, 58, 237, 0.15));
+    border: 1px solid rgba(37, 99, 235, 0.3);
+    box-shadow: 0 0 20px rgba(37, 99, 235, 0.1);
+  }
+
+  .metric-value {
+    font-family: 'Outfit', sans-serif;
+    @apply text-3xl font-bold text-white tracking-tight;
+  }
+
+  .number-font {
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .section-title {
+    @apply text-lg font-bold text-white mb-1;
+  }
+
+  .section-subtitle {
+    @apply text-xs text-slate-400;
+  }
+
+  .ai-glow-card {
+    background: linear-gradient(135deg, rgba(8, 14, 36, 0.95) 0%, rgba(15, 25, 60, 0.9) 100%);
+    border: 1px solid rgba(124, 58, 237, 0.3);
+    border-radius: 16px;
+    box-shadow: 0 0 0 1px rgba(124, 58, 237, 0.1), 0 0 30px rgba(124, 58, 237, 0.15), inset 0 1px 0 rgba(167, 139, 250, 0.08);
+    animation: glowPulse 3s ease-in-out infinite;
+  }
+
+  .trend-badge-up {
+    @apply flex items-center gap-1 text-xs font-semibold px-2 py-0.5 rounded-md;
+    background: rgba(16, 185, 129, 0.15);
+    color: #10B981;
+  }
+
+  .trend-badge-down {
+    @apply flex items-center gap-1 text-xs font-semibold px-2 py-0.5 rounded-md;
+    background: rgba(239, 68, 68, 0.15);
+    color: #EF4444;
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    background: linear-gradient(135deg, #2563EB, #7C3AED);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .text-gradient-green {
+    background: linear-gradient(135deg, #10B981, #0891B2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .chart-grid line {
+    stroke: rgba(255, 255, 255, 0.04);
+  }
+}
