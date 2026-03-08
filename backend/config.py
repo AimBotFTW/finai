@@ -14,3 +14,4 @@ APP_VERSION: str = "2.0.0"
 if not GEMINI_API_KEY:
     print("⚠️  WARNING: GEMINI_API_KEY is not set. AI features will use rule-based fallback.")
 
+print("Loaded Gemini Key:", GEMINI_API_KEY)
